@@ -548,7 +548,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // res.status(200).json({ code: "there is a file" });
 
   // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-  fs.readFile(`devyehia@gmail.com.jpeg`, function (err, data) {
+  fs.readFile(directionnameplace, function (err, data) {
     if (err) console.log("error"); // Fail if the file can't be read.
     // {
     //   encoding: "base64",
