@@ -503,7 +503,7 @@ const updateItem_post = async (req, res) => {
       .jpeg({ quality: 90 })
       .toFile(path);
 
-    fs.unlink(`${process.cwd()}/public/products/${selectedItem}.jpeg`),
+    fs.unlink(`public/products/${selectedItem}.jpeg`),
       (err) => {
         if (err) console.log("can't find it so");
 
