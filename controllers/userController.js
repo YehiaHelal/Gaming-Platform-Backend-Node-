@@ -10,6 +10,7 @@ const multer = require("multer");
 const path = require("path");
 const sharp = require("sharp");
 const { promisify } = require("util");
+const { readFileSync } = require("fs");
 
 const http = require("http");
 const fs = require("fs");
@@ -558,8 +559,8 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // const directionnameplaceloc = path.resolve(process.cwd(), "public");
 
   // var path = require("path");
-  const configDirectory = path.resolve(process.cwd(), "users");
-  const file = readFileSync(
+  const configDirectory = path.resolve(process.cwd(), "public/users");
+  const file = fs.readFileSync(
     path.join(configDirectory, "devyehia@gmail.com.jpeg"),
     function (err, data) {
       //   "utf8"
@@ -582,9 +583,13 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
         .pop()};base64,${base64Image}`;
 
       // res.status(200).json({ images: base64ImageStr });
-      res.status(200).json({ images: base64ImageStr });
+      // res.status(200).json({ images: base64ImageStr });
     }
   );
+
+  console.log(file);
+  res.status(200).json({ images: file });
+
   // // convert image file to base64-encoded string
   // const base64Image = Buffer.from(data, "binary").toString("base64");
 
