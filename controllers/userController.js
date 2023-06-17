@@ -558,7 +558,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // const directionnameplaceloc = path.resolve(process.cwd(), "public");
 
   // var path = require("path");
-  const configDirectory = path.resolve(process.cwd(), "public");
+  const configDirectory = path.resolve(process.cwd(), "users");
   const file = readFileSync(
     path.join(configDirectory, "devyehia@gmail.com.jpeg"),
     function (err, data) {
