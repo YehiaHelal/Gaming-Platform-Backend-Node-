@@ -543,33 +543,34 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
   // const base64Image = Buffer.from(data, "binary").toString("base64");
 
-  fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-    if (err) console.log("error"); // Fail if the file can't be read.
-    // {
-    //   encoding: "base64",
-    // },
+  res.status(200).json({ code: "there is a file" });
 
-    const base64Image = Buffer.from(data, "binary").toString("base64");
+  // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
+  //   if (err) console.log("error"); // Fail if the file can't be read.
+  //   // {
+  //   //   encoding: "base64",
+  //   // },
 
-    const base64ImageStr = `data:image/${extensionName
-      .split(".")
-      .pop()};base64,${base64Image}`;
+  //   const base64Image = Buffer.from(data, "binary").toString("base64");
 
-    // res.status(200).json({ images: base64ImageStr });
-    res.status(200).json({ images: "there is a file" });
+  //   const base64ImageStr = `data:image/${extensionName
+  //     .split(".")
+  //     .pop()};base64,${base64Image}`;
 
-    // // convert image file to base64-encoded string
-    // const base64Image = Buffer.from(data, "binary").toString("base64");
+  //   // res.status(200).json({ images: base64ImageStr });
+  //   res.status(200).json({ images: "there is a file" });
+  // });
+  // // convert image file to base64-encoded string
+  // const base64Image = Buffer.from(data, "binary").toString("base64");
 
-    // const base64ImageStr = `data:image/${extensionName
-    //   .split(".")
-    //   .pop()};base64,${base64Image}`;
+  // const base64ImageStr = `data:image/${extensionName
+  //   .split(".")
+  //   .pop()};base64,${base64Image}`;
 
-    // // console.log(base64ImageStr);
+  // // console.log(base64ImageStr);
 
-    // return base64ImageStr;
-    // console.log(data);
-  });
+  // return base64ImageStr;
+  // console.log(data);
 
   // fs.readFile(directionname, function (err, data) {
   // fs.readFile(directionnameplace, function (err, data) {
