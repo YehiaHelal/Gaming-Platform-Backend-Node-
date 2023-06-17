@@ -565,35 +565,40 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     "devyehia@gmail.com.jpeg"
   );
 
-  res.status(200).json({ images: "configDirectory" });
+  console.log(process.cwd());
 
-  // fs.readFile(configDirectory, function (err, data) {
-  //   //   "utf8"
-  //   // );
+  // res.status(200).json({ images: process.cwd() });
 
-  //   // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-  //   // fs.readFileSync(directionnameplaceloc, function (err, data) {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(400).json({ error: err, loc: process.cwd() });
-  //   } // Fail if the file can't be read.
-  //   // {
-  //   //   encoding: "base64",
-  //   // },
+  fs.readFile(
+    `${process.cwd()}/public/users/devyehia@gmail.com.jpeg`,
+    function (err, data) {
+      //   "utf8"
+      // );
 
-  //   const base64Image = Buffer.from(data, "binary").toString("base64");
+      // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
+      // fs.readFileSync(directionnameplaceloc, function (err, data) {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ error: err, loc: process.cwd() });
+      } // Fail if the file can't be read.
+      // {
+      //   encoding: "base64",
+      // },
 
-  //   const base64ImageStr = `data:image/${extensionName
-  //     .split(".")
-  //     .pop()};base64,${base64Image}`;
+      const base64Image = Buffer.from(data, "binary").toString("base64");
 
-  //   // res.status(200).json({ images: base64ImageStr });
-  //   // res.status(200).json({ images: base64ImageStr });
+      const base64ImageStr = `data:image/${extensionName
+        .split(".")
+        .pop()};base64,${base64Image}`;
 
-  //   res.setHeader("Content-Type", "multipart/form-data");
+      // res.status(200).json({ images: base64ImageStr });
+      // res.status(200).json({ images: base64ImageStr });
 
-  //   res.status(200).json({ images: base64ImageStr });
-  // });
+      res.setHeader("Content-Type", "multipart/form-data");
+
+      res.status(200).json({ images: base64ImageStr });
+    }
+  );
 
   // // convert image file to base64-encoded string
   // const base64Image = Buffer.from(data, "binary").toString("base64");
@@ -1009,7 +1014,7 @@ const resetpasswordemail_post = async (req, res, next) => {
     to: `${getuser.email}`,
     subject: "Reset Password Email",
     text: "Hello, please open this link to reset your password, (note if the link didn't work that might be because the email was added to the spam, you can copy the link and paste it, or mark the email as not spam to be able to open the link normally)",
-    html: `<a href="https://gaming-platform-frontend-next.vercel.app/resetpassword/${token}">https://gaming-platform-frontend-next.vercel.app/resetpassword/${token}</a>
+    html: `<a href="http://localhost:3000/resetpassword/${token}">http://localhost:3000/resetpassword/${token}</a>
      <br>Please open this link to reset your password<br>
      <br>Click on the link to open it or copy it to the browser to open it<br>
      <br><br> <br>(note if the link didn't work that might be because the email was added to the spam, you can copy the link and paste it, or mark the email as not spam to be able to open the link normally)<br>`,
@@ -1067,7 +1072,7 @@ const orderConfirmedemail_post = async (req, res, next) => {
          <br>Order Number ${1000 + userOrderNumber}<br>
          <br><br>
          <br>If you want to check our other products please visit this link<br>
-         <a href="https://gaming-platform-frontend-next.vercel.app/collections">https://gaming-platform-frontend-next.vercel.app/collections</a>
+         <a href="http://localhost:3000/collections">http://localhost:3000/collections</a>
          <br><br>
          <br>And If you have any question or inquiry please don't hesitate to open the live chat on our website or contact us<br>
          `,
