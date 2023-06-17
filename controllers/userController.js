@@ -623,7 +623,9 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     "/../public/users/devyehia@gmail.com.jpeg"
   );
 
-  const directionnameplace = path.resolve(`${req.user.email}.jpeg`);
+  const directionnameplace = path.resolve(
+    `./public/users/${req.user.email}.jpeg`
+  );
 
   // fs.readFile(directionname, function (err, data) {
   fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
