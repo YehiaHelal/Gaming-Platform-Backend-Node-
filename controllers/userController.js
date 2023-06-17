@@ -564,7 +564,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     "public/users",
     "devyehia@gmail.com.jpeg"
   );
-  const file = fs.readFile(configDirectory, function (err, data) {
+  fs.readFile(configDirectory, function (err, data) {
     //   "utf8"
     // );
 
@@ -572,7 +572,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     // fs.readFileSync(directionnameplaceloc, function (err, data) {
     if (err) {
       console.log(err);
-      return res.status(400).json({ error: err });
+      return res.status(400).json({ error: err, loc: process.cwd() });
     } // Fail if the file can't be read.
     // {
     //   encoding: "base64",
@@ -586,12 +586,11 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
     // res.status(200).json({ images: base64ImageStr });
     // res.status(200).json({ images: base64ImageStr });
+
+    res.setHeader("Content-Type", "multipart/form-data");
+
+    res.status(200).json({ images: base64ImageStr });
   });
-
-  res.setHeader("Content-Type", "multipart/form-data");
-
-  console.log(file);
-  res.status(200).json({ images: file });
 
   // // convert image file to base64-encoded string
   // const base64Image = Buffer.from(data, "binary").toString("base64");
