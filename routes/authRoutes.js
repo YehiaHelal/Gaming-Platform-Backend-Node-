@@ -43,7 +43,7 @@ router.post(
 // Updated... : Image Fetch from Backend & sending to frontend
 router.post(
   "/imagesendingtofe",
-  // authController.requireAuth,
+  authController.requireAuth,
   // userController.uploadUserPhoto_post,
   // userController.imageUploader.single("photo"),
   userController.ImageProfileSendBackToFe
