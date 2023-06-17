@@ -289,15 +289,17 @@ const imageUserAddUpdate = async (req, res, next) => {
 
   const pathlocationth = `${process.cwd()}/public/users/${req.user.email}.jpeg`;
 
-  console.log(pathlocationth);
+  // console.log(pathlocationth);
 
-  // const path = `./../backend/public/users/${req.user.email}.jpeg`;
+  // // const path = `./../backend/public/users/${req.user.email}.jpeg`;
 
-  await sharp(req.files.photo.data)
-    .resize(300, 300)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(pathlocationth);
+  // await sharp(req.files.photo.data)
+  //   .resize(300, 300)
+  //   .toFormat("jpeg")
+  //   .jpeg({ quality: 90 })
+  //   .toFile(pathlocationth);
+
+  res.status(200).json({ message: pathlocationth });
 
   // const semiTransparentRedPng = await sharp(req.files.photo.data)
   //   .resize(300, 300)
