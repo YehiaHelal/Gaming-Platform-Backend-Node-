@@ -49,7 +49,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 //   })
 // );
 
-app.use(cors());
+// app.use(cors());
 
 // app.use(cors());
 app.use(fileUpload());
