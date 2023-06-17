@@ -543,23 +543,24 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
   // const base64Image = Buffer.from(data, "binary").toString("base64");
 
-  res.status(200).json({ code: "there is a file" });
+  // res.status(200).json({ code: "there is a file" });
 
   // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-  //   if (err) console.log("error"); // Fail if the file can't be read.
-  //   // {
-  //   //   encoding: "base64",
-  //   // },
+  fs.readFile(`devyehia@gmail.com.jpeg`, function (err, data) {
+    if (err) console.log("error"); // Fail if the file can't be read.
+    // {
+    //   encoding: "base64",
+    // },
 
-  //   const base64Image = Buffer.from(data, "binary").toString("base64");
+    const base64Image = Buffer.from(data, "binary").toString("base64");
 
-  //   const base64ImageStr = `data:image/${extensionName
-  //     .split(".")
-  //     .pop()};base64,${base64Image}`;
+    const base64ImageStr = `data:image/${extensionName
+      .split(".")
+      .pop()};base64,${base64Image}`;
 
-  //   // res.status(200).json({ images: base64ImageStr });
-  //   res.status(200).json({ images: "there is a file" });
-  // });
+    // res.status(200).json({ images: base64ImageStr });
+    res.status(200).json({ images: base64ImageStr });
+  });
   // // convert image file to base64-encoded string
   // const base64Image = Buffer.from(data, "binary").toString("base64");
 
