@@ -564,33 +564,36 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     "public/users",
     "devyehia@gmail.com.jpeg"
   );
-  fs.readFile(configDirectory, function (err, data) {
-    //   "utf8"
-    // );
 
-    // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-    // fs.readFileSync(directionnameplaceloc, function (err, data) {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ error: err, loc: process.cwd() });
-    } // Fail if the file can't be read.
-    // {
-    //   encoding: "base64",
-    // },
+  res.status(200).json({ images: configDirectory });
 
-    const base64Image = Buffer.from(data, "binary").toString("base64");
+  // fs.readFile(configDirectory, function (err, data) {
+  //   //   "utf8"
+  //   // );
 
-    const base64ImageStr = `data:image/${extensionName
-      .split(".")
-      .pop()};base64,${base64Image}`;
+  //   // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
+  //   // fs.readFileSync(directionnameplaceloc, function (err, data) {
+  //   if (err) {
+  //     console.log(err);
+  //     return res.status(400).json({ error: err, loc: process.cwd() });
+  //   } // Fail if the file can't be read.
+  //   // {
+  //   //   encoding: "base64",
+  //   // },
 
-    // res.status(200).json({ images: base64ImageStr });
-    // res.status(200).json({ images: base64ImageStr });
+  //   const base64Image = Buffer.from(data, "binary").toString("base64");
 
-    res.setHeader("Content-Type", "multipart/form-data");
+  //   const base64ImageStr = `data:image/${extensionName
+  //     .split(".")
+  //     .pop()};base64,${base64Image}`;
 
-    res.status(200).json({ images: base64ImageStr });
-  });
+  //   // res.status(200).json({ images: base64ImageStr });
+  //   // res.status(200).json({ images: base64ImageStr });
+
+  //   res.setHeader("Content-Type", "multipart/form-data");
+
+  //   res.status(200).json({ images: base64ImageStr });
+  // });
 
   // // convert image file to base64-encoded string
   // const base64Image = Buffer.from(data, "binary").toString("base64");
