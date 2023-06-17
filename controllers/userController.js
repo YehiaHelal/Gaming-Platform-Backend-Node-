@@ -522,10 +522,10 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
   // `public/products/`;
 
-  const directionname = path.join(
-    __dirname,
-    `/../public/users/${req.user.email}.jpeg`
-  );
+  // const directionname = path.join(
+  //   __dirname,
+  //   `/../public/users/${req.user.email}.jpeg`
+  // );
 
   // const directionnamerr = path.dirname(
   //   "/../public/users/devyehia@gmail.com.jpeg"
@@ -535,11 +535,15 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   //   `./public/users/${req.user.email}.jpeg`
   // );
 
-  const directionnameplace = path.resolve(
+  const directionnameplaceloc = path.resolve(
     `./public/users/devyehia@gmail.com.jpeg`
   );
 
+  console.log(directionnameplaceloc);
+
   // const directionnameplace = path.resolve(`devyehia@gmail.com.jpeg`);
+
+  // console.log(directionnameplace);
 
   //  fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
   // if (err)
@@ -552,8 +556,11 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // res.status(200).json({ code: "there is a file" });
 
   // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-  fs.readFile(directionnameplace, function (err, data) {
-    if (err) console.log("error"); // Fail if the file can't be read.
+  fs.readFile(directionnameplaceloc, function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: err });
+    } // Fail if the file can't be read.
     // {
     //   encoding: "base64",
     // },
