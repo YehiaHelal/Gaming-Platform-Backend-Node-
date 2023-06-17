@@ -556,7 +556,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // res.status(200).json({ code: "there is a file" });
 
   // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-  fs.readFile(directionnameplaceloc, function (err, data) {
+  fs.readFileSync(directionnameplaceloc, function (err, data) {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: err });
