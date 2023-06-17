@@ -670,7 +670,8 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
       .split(".")
       .pop()};base64,${base64Image}`;
 
-    res.status(200).json({ images: base64ImageStr });
+    // res.status(200).json({ images: base64ImageStr });
+    res.status(200).json({ images: "there is a file" });
   });
 
   // fs.readFile(directionname, function (err, data) {
