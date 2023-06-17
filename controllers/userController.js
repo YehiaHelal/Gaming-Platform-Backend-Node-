@@ -637,7 +637,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     //   // },
     // );
 
-    fs.readFileSync(
+    fs.readFile(
       `public/products/${filename}`,
       // {
       //   encoding: "base64",
