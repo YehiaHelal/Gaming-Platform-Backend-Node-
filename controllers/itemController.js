@@ -508,7 +508,7 @@ const updateItem_post = async (req, res) => {
 
       console.log(`${process.cwd()}`);
 
-      fs.unlink(`./public/products/${selectedItem}.jpeg`),
+      fs.unlink(`${process.cwd()}/public/products/product700.jpeg`),
         (err) => {
           if (err) console.log("can't find it so");
 
