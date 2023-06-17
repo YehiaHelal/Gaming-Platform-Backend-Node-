@@ -285,7 +285,11 @@ const imageUserAddUpdate = async (req, res, next) => {
   //buffer
   // console.log(req.files.photo.data);
 
-  const path = `./../backend/public/users/${req.user.email}.jpeg`;
+  `${process.cwd()}/public/users/devyehia@gmail.com.jpeg`;
+
+  const path = `${process.cwd()}/public/users/${req.user.email}.jpeg`;
+
+  // const path = `./../backend/public/users/${req.user.email}.jpeg`;
 
   await sharp(req.files.photo.data)
     .resize(300, 300)
