@@ -271,12 +271,14 @@ const deleteItem_post = async (req, res) => {
       return res.status(400).json({ error: "Error, No such item found" });
     }
 
-    console.log(
-      pathdirections.join(__dirname, `/../public/products/${name}.jpeg`)
-    );
+    // console.log(
+    //   pathdirections.join(__dirname, `/../public/products/${name}.jpeg`)
+    // );
     // Deleting Item Image too
 
-    fs.unlink(`${process.cwd()}/../public/products/${name}.jpeg`),
+    const filepathLocation = `${process.cwd()}/public/products/${name}.jpeg`;
+
+    fs.unlink(filepathLocation),
       (err) => {
         if (err) {
           // console.log("error");
@@ -504,7 +506,9 @@ const updateItem_post = async (req, res) => {
       //   .jpeg({ quality: 90 })
       //   .toFile(path);
 
-      fs.unlink(`/public/products/${selectedItem}.jpeg`),
+      console.log(`${process.cwd()}`);
+
+      fs.unlink(`./public/products/${selectedItem}.jpeg`),
         (err) => {
           if (err) console.log("can't find it so");
 
