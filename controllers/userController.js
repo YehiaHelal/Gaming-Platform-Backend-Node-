@@ -628,7 +628,8 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   );
 
   // fs.readFile(directionname, function (err, data) {
-  fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
+  fs.readFile(`./public/users/${req.user.email}.jpeg`, function (err, data) {
+    // fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
     if (err)
       return res
         .status(200)
