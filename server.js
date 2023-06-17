@@ -45,7 +45,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "https://gaming-platform-frontend-next.vercel.app",
   })
 );
 
