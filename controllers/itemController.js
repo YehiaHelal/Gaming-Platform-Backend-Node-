@@ -347,23 +347,23 @@ const updateItem_post = async (req, res) => {
     }
   }
 
-  if (req.body.name) {
-    // console.log("there is name");
+  // if (req.body.name) {
+  //   // console.log("there is name");
 
-    const productname = req.body.name;
+  //   const productname = req.body.name;
 
-    try {
-      const newUserPassword = await Item.findOneAndUpdate(
-        { name: selectedItem },
-        { name: productname },
-        {
-          new: true,
-        }
-      );
-    } catch (error) {
-      res.status(400).json({ error: "Error, same product name already exist" });
-    }
-  }
+  //   try {
+  //     const newUserPassword = await Item.findOneAndUpdate(
+  //       { name: selectedItem },
+  //       { name: productname },
+  //       {
+  //         new: true,
+  //       }
+  //     );
+  //   } catch (error) {
+  //     res.status(400).json({ error: "Error, same product name already exist" });
+  //   }
+  // }
 
   // Assiging the Name and Price
   // const productname = req.body.name;
@@ -494,21 +494,25 @@ const updateItem_post = async (req, res) => {
   }
 
   // if editing image
-  if (req.files && req.body.name) {
-    const path = `${process.cwd()}/public/products/${req.body.name}.jpeg`;
+  try {
+    if (req.files && req.body.name) {
+      // const path = `${process.cwd()}/public/products/${req.body.name}.jpeg`;
 
-    await sharp(req.files.photo.data)
-      .resize(300, 300)
-      .toFormat("jpeg")
-      .jpeg({ quality: 90 })
-      .toFile(path);
+      // await sharp(req.files.photo.data)
+      //   .resize(300, 300)
+      //   .toFormat("jpeg")
+      //   .jpeg({ quality: 90 })
+      //   .toFile(path);
 
-    fs.unlink(`public/products/${selectedItem}.jpeg`),
-      (err) => {
-        if (err) console.log("can't find it so");
+      fs.unlink(`/public/products/${selectedItem}.jpeg`),
+        (err) => {
+          if (err) console.log("can't find it so");
 
-        // console.log("successfully deleted");
-      };
+          // console.log("successfully deleted");
+        };
+    }
+  } catch (error) {
+    console.log("error");
   }
 
   // if editing product but not image
