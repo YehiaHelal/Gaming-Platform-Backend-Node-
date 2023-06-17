@@ -262,13 +262,13 @@ const updateUser_post = async (req, res) => {
 
 // without multer and using only sharp
 
-const resizeUserPhoto = async (req, res, next) => {
+const imageUserAddUpdate = async (req, res, next) => {
   // to get the user email and full data
   // console.log(req.user.email);
   // console.log(res.locals.user);
 
   // splitting the user email after @
-  const emailwithoutatsign = req.user.email.split("@")[0];
+  // const emailwithoutatsign = req.user.email.split("@")[0];
 
   // console.log(emailwithoutatsign);
 
@@ -281,47 +281,50 @@ const resizeUserPhoto = async (req, res, next) => {
   // file name senf from frontend
   // console.log(req.files.photo.name);
 
-  // const path = `./../frontend/public/users/images/${req.user.email}.jpeg`;
+  //buffer
+  // console.log(req.files.photo.data);
 
-  // await sharp(req.file.buffer)
-  //   .resize(300, 300)
-  //   .toFormat("jpeg")
-  //   .jpeg({ quality: 90 });
-  // //   .toFile(path);
+  const path = `./../backend/public/users/${req.user.email}.jpeg`;
 
-  const semiTransparentRedPng = await sharp(req.files.photo.data)
+  await sharp(req.files.photo.data)
     .resize(300, 300)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
-    // .png()
-    .toBuffer();
+    .toFile(path);
 
-  // console.log(semiTransparentRedPng);
+  // const semiTransparentRedPng = await sharp(req.files.photo.data)
+  //   .resize(300, 300)
+  //   .toFormat("jpeg")
+  //   .jpeg({ quality: 90 })
+  //   // .png()
+  //   .toBuffer();
 
-  AWS.config.update({
-    accessKeyId: process.env.accessKeyId,
-    secretAccessKey: process.env.secretAccessKey,
-    region: process.env.region,
-  });
+  // uploading to s3
 
-  const s3 = new AWS.S3();
+  // AWS.config.update({
+  //   accessKeyId: process.env.accessKeyId,
+  //   secretAccessKey: process.env.secretAccessKey,
+  //   region: process.env.region,
+  // });
 
-  const fileContent = Buffer.from(semiTransparentRedPng, "binary");
+  // const s3 = new AWS.S3();
 
-  const params = {
-    Bucket: "next-ecommerce-s3",
-    // Key: req.files.photo.name,
-    Key: `${emailwithoutatsign}.png`,
-    Body: fileContent,
-    ACL: "public-read",
-  };
+  // const fileContent = Buffer.from(semiTransparentRedPng, "binary");
 
-  s3.upload(params, (err, data) => {
-    if (err) {
-      throw err;
-    }
-    res.send({ data: data });
-  });
+  // const params = {
+  //   Bucket: "next-ecommerce-s3",
+  //   // Key: req.files.photo.name,
+  //   Key: `${emailwithoutatsign}.png`,
+  //   Body: fileContent,
+  //   ACL: "public-read",
+  // };
+
+  // s3.upload(params, (err, data) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   res.send({ data: data });
+  // });
 
   // updating user image
   // const user = await User.findOneAndUpdate(
@@ -332,7 +335,7 @@ const resizeUserPhoto = async (req, res, next) => {
   //   }
   // );
 
-  // res.status(200).json({ message: "Image Added Successfully" });
+  res.status(200).json({ message: "Image Added Successfully" });
 };
 
 // for items adding
@@ -503,82 +506,88 @@ const resizeUserPhoto = async (req, res, next) => {
 // };
 
 // sending the image back to the frontend
-const ImageSendBackToFe = async (req, res, next) => {
+const ImageProfileSendBackToFe = async (req, res, next) => {
   // to get the user email and full data
   // console.log(req.user.email);
   // console.log(res.locals.user);
 
   // console.log(req.file);
 
-  // const path = `./../frontend/public/users/images/${req.user.email}.jpeg`;
+  const extensionName = "jpeg";
 
-  // await sharp(req.file.buffer)
-  //   .resize(300, 300)
-  //   .toFormat("jpeg")
-  //   .jpeg({ quality: 90 })
-  //   .toFile(path);
+  const directionname = path.join(
+    __dirname,
+    `/../public/users/${req.user.email}.jpeg`
+  );
 
-  // updating user image
-  // const user = await User.findOneAndUpdate(
-  //   { email: res.locals.user.email },
-  //   { photo: req.file.originalname },
-  //   {
-  //     new: true,
-  //   }
-  // );
-  // const image = fs.readFile("image1.png");
+  fs.readFile(directionname, function (err, data) {
+    if (err) return res.status(200).json({ message: "no image" }); // Fail if the file can't be read.
 
-  fs.readFile("public/image1.png", function (err, data) {
-    if (err) throw err; // Fail if the file can't be read.
-    // http.createServer(function(req, res) {
-    //   res.writeHead(200, {'Content-Type': 'image/jpeg'})
-    //   res.end(data) // Send the file data to the browser.
-    // }).listen(8124)
-    // console.log('Server running at http://localhost:8124/')
-    // console.log(data);
-
-    res.download("public/image1.png");
-
-    res.status(200).json({ message: "Image Added Successfully" });
-
-    const extensionName = "png";
-
-    // convert image file to base64-encoded string
     const base64Image = Buffer.from(data, "binary").toString("base64");
 
-    // combine all strings
-    // const base64ImageStr = `data:image/${extensionName
-    //   .split(".")
-    //   .pop()};base64,${base64Image}`;
+    const base64ImageStr = `data:image/${extensionName
+      .split(".")
+      .pop()};base64,${base64Image}`;
 
-    // console.log(base64Image);
-
-    // console.log(base64ImageStr);
-
-    // res.status(200).json({ image: base64Image });
-
-    // res.status(200).json({ message: base64Image });
-
-    // res.download("public/image1.png");
-
-    // res.status(200).json({ message: "Image Added Successfully" });
+    res.status(200).json({ images: base64ImageStr });
   });
-
-  // console.log(image);
-
-  // fs.readFile("image.jpg", function (err, data) {
-  //   if (err) throw err; // Fail if the file can't be read.
-  //   http
-  //     .createServer(function (req, res) {
-  //       res.writeHead(200, { "Content-Type": "image/jpeg" });
-  //       res.end(data); // Send the file data to the browser.
-  //     })
-  //     .listen(8124);
-  //   console.log("Server running at http://localhost:8124/");
-  // });
-
-  // res.status(200).json({ message: "Image Added Successfully" });
 };
+
+// try {
+//   fs.readFile(`public/users/${req.user.email}.jpeg`, function (err, data) {
+//     if (err) return res.status(200).json({ message: "no image" }); // Fail if the file can't be read.
+
+//     // http.createServer(function(req, res) {
+//     //   res.writeHead(200, {'Content-Type': 'image/jpeg'})
+//     //   res.end(data) // Send the file data to the browser.
+//     // }).listen(8124)
+//     // console.log('Server running at http://localhost:8124/')
+//     // console.log(data);
+
+//     // res.download(`public/users/${req.user.email}.jpeg`);
+
+//     // res.status(200).json({ message: "Image Added Successfully" });
+
+//     const extensionName = "jpeg";
+
+//     // convert image file to base64-encoded string
+//     const base64Image = Buffer.from(data, "binary").toString("base64");
+
+//     // console.log(base64Image);
+
+//     // combine all strings
+//     const base64ImageStr = `data:image/${extensionName
+//       .split(".")
+//       .pop()};base64,${base64Image}`;
+
+//     // console.log(base64Image);
+
+//     // console.log(base64ImageStr);
+
+//     return res.status(200).json({ image: base64ImageStr });
+
+//     // res.status(200).json({ message: base64Image });
+
+//     // res.download("public/image1.png");
+//   });
+// } catch (error) {
+//   return res.status(200).json({ message: "error" });
+// }
+
+// res.status(200).json({ message: "ImageSend" });
+
+// fs.readFile("image.jpg", function (err, data) {
+//   if (err) throw err; // Fail if the file can't be read.
+//   http
+//     .createServer(function (req, res) {
+//       res.writeHead(200, { "Content-Type": "image/jpeg" });
+//       res.end(data); // Send the file data to the browser.
+//     })
+//     .listen(8124);
+//   console.log("Server running at http://localhost:8124/");
+// });
+
+// res.status(200).json({ message: "Image Added Successfully" });
 
 // Uploading Images to S3 bucket
 const uploadingImagesToS3 = async (req, res, next) => {
@@ -615,7 +624,7 @@ const uploadingImagesToS3 = async (req, res, next) => {
     // console.log('Server running at http://localhost:8124/')
     // console.log(data);
 
-    res.download("public/image1.png");
+    // res.download("public/image1.png");
 
     res.status(200).json({ message: "Image Added Successfully" });
 
@@ -1753,7 +1762,7 @@ module.exports = {
   deleteUser_post,
   getAllUsers_post,
   AddUserAdmin_post,
-  resizeUserPhoto,
+  imageUserAddUpdate,
   saveContact_post,
   getNameData_post,
   changePassword_post,
@@ -1763,7 +1772,7 @@ module.exports = {
   getMessages_post,
   ResetPasswordwToken_post,
   orderConfirmedemail_post,
-  ImageSendBackToFe,
+  ImageProfileSendBackToFe,
   deactivateUser_post,
   UserAddNote_post,
   addUserFromAdmin_post,

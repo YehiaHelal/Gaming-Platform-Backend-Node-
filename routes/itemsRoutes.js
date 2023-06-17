@@ -8,12 +8,15 @@ const router = express.Router();
 // GET all Items
 router.get("/", itemController.getItems);
 
+// GET all Items Images
+router.get("/itemsImages", itemController.ProductsImageSendBackToFe);
+
 //GET a single Item
 router.get("/:id", itemController.getItem);
 
 // for admin  //
 
-// ADD NEW PRODUCT
+// ADD NEW PRODUCT + Image
 router.post(
   "/addproduct",
   authController.requireAuth,
@@ -29,7 +32,7 @@ router.post(
   itemController.deleteItem_post
 );
 
-// update a Item
+// update a Item + Image
 router.post(
   "/editproduct",
   authController.requireAuth,

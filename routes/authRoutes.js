@@ -30,12 +30,23 @@ router.post(
 );
 
 // update or add profile image to S3 bucket
+// Updated... : Image of User Adding or Updating the Image
 router.post(
   "/imageupdate",
   authController.requireAuth,
   // userController.uploadUserPhoto_post,
   // userController.imageUploader.single("photo"),
-  userController.resizeUserPhoto
+  userController.imageUserAddUpdate
+);
+
+// update or add profile image to S3 bucket
+// Updated... : Image Fetch from Backend & sending to frontend
+router.post(
+  "/imagesendingtofe",
+  authController.requireAuth,
+  // userController.uploadUserPhoto_post,
+  // userController.imageUploader.single("photo"),
+  userController.ImageProfileSendBackToFe
 );
 
 // update or add an image
