@@ -301,9 +301,7 @@ const imageUserAddUpdate = async (req, res, next) => {
     .jpeg({ quality: 90 })
     .toFile(pathlocationth);
 
-  res
-    .status(200)
-    .json({ message: `${process.cwd()}/public/users/${req.user.email}.jpeg` });
+  res.status(200).json({ message: `user image updated successfully` });
 
   // const semiTransparentRedPng = await sharp(req.files.photo.data)
   //   .resize(300, 300)
@@ -571,13 +569,6 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // const directionnameplaceloc = path.resolve(process.cwd(), "public");
 
   // var path = require("path");
-  const configDirectory = path.resolve(
-    process.cwd(),
-    "public/users",
-    "devyehia@gmail.com.jpeg"
-  );
-
-  console.log(process.cwd());
 
   // res.status(200).json({ images: process.cwd() });
 
@@ -723,8 +714,8 @@ const uploadingImagesToS3 = async (req, res, next) => {
   //   }
   // );
   // const image = fs.readFile("image1.png");
-
-  fs.readFile("public/image1.png", function (err, data) {
+ 
+  fs.readFile(`${process.cwd()}/public/image1.png`, function (err, data) {
     if (err) throw err; // Fail if the file can't be read.
     // http.createServer(function(req, res) {
     //   res.writeHead(200, {'Content-Type': 'image/jpeg'})

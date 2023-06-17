@@ -193,13 +193,13 @@ const createNewItem_post = async (req, res) => {
 
   // Adding Image to backend locally public item file
 
-  const path = `./../backend/public/products/${productname}.jpeg`;
+  const pathlocationth = `${process.cwd()}/public/products/${productname}.jpeg`;
 
   await sharp(req.files.photo.data)
     .resize(300, 300)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
-    .toFile(path);
+    .toFile(pathlocationth);
 
   // // const { name, price } = req.body.submission;
 
@@ -275,8 +275,8 @@ const deleteItem_post = async (req, res) => {
       pathdirections.join(__dirname, `/../public/products/${name}.jpeg`)
     );
     // Deleting Item Image too
-    fs.unlink(
-      pathdirections.join(__dirname, `/../public/products/${name}.jpeg`),
+
+    fs.unlink(`${process.cwd()}/../public/products/${name}.jpeg`),
       (err) => {
         if (err) {
           // console.log("error");
@@ -286,8 +286,7 @@ const deleteItem_post = async (req, res) => {
         //   .json({ error: "File doesn't exist, can't find it." });
 
         // console.log("successfully deleted");
-      }
-    );
+      };
 
     res.status(200).json({ message: "Item Deleted" });
   } catch (error) {
@@ -485,7 +484,7 @@ const updateItem_post = async (req, res) => {
 
   // if editing image
   if (req.files && !req.body.name) {
-    const path = `./../backend/public/products/${selectedItem}.jpeg`;
+    const path = `${process.cwd()}/public/products/${selectedItem}.jpeg`;
 
     await sharp(req.files.photo.data)
       .resize(300, 300)
@@ -496,7 +495,7 @@ const updateItem_post = async (req, res) => {
 
   // if editing image
   if (req.files && req.body.name) {
-    const path = `./../backend/public/products/${req.body.name}.jpeg`;
+    const path = `${process.cwd()}/public/products/${req.body.name}.jpeg`;
 
     await sharp(req.files.photo.data)
       .resize(300, 300)
@@ -504,17 +503,12 @@ const updateItem_post = async (req, res) => {
       .jpeg({ quality: 90 })
       .toFile(path);
 
-    fs.unlink(
-      pathdirections.join(
-        __dirname,
-        `/../public/products/${selectedItem}.jpeg`
-      ),
+    fs.unlink(`${process.cwd()}/public/products/${selectedItem}.jpeg`),
       (err) => {
         if (err) console.log("can't find it so");
 
         // console.log("successfully deleted");
-      }
-    );
+      };
   }
 
   // if editing product but not image
@@ -529,15 +523,11 @@ const updateItem_post = async (req, res) => {
     //     .toFile(path);
     // }
 
-    const filepathLocation = pathdirections.join(
-      __dirname,
-      `/../public/products/${selectedItem}.jpeg`
-    );
+    const filepathLocation = `${process.cwd()}/public/products/${selectedItem}.jpeg`;
 
-    const filepathLocationRename = pathdirections.join(
-      __dirname,
-      `/../public/products/${req.body.name}.jpeg`
-    );
+    const filepathLocationRename = `${process.cwd()}/public/products/${
+      req.body.name
+    }.jpeg`;
 
     // fs.rename("/path/to/Afghanistan.png", "/path/to/AF.png", function (err) {
     //   if (err) console.log("ERROR: " + err);
