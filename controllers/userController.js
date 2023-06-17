@@ -619,14 +619,18 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     `/../public/users/${req.user.email}.jpeg`
   );
 
-  const directionnamerr = path.dirname("public/users/");
+  const directionnamerr = path.dirname(
+    "/../public/users/devyehia@gmail.com.jpeg"
+  );
+
+  const directionnameplace = path.resolve("joe.txt");
 
   // fs.readFile(directionname, function (err, data) {
   fs.readFile(`public/users/${req.user.email}.jpeg`, function (err, data) {
     if (err)
       return res
         .status(200)
-        .json({ message: "no image", direction: directionnamerr }); // Fail if the file can't be read.
+        .json({ message: "no image", direction: directionnameplace }); // Fail if the file can't be read.
 
     const base64Image = Buffer.from(data, "binary").toString("base64");
 
