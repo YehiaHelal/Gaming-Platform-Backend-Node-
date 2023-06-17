@@ -42,14 +42,12 @@ app.use((req, res, next) => {
 });
 
 app.use(cookieParser()); // To parse the incoming cookies
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: "https://gaming-platform-frontend-next.vercel.app",
-//   })
-// );
-
-// app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://gaming-platform-frontend-next.vercel.app",
+  })
+);
 
 // app.use(cors());
 app.use(fileUpload());
