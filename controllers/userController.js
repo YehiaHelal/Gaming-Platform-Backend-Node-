@@ -520,104 +520,12 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   //   `/../public/users/${req.user.email}.jpeg`
   // );
 
-  // fs.readdir(`public/products/`, (err, files) => {
-  //   if (err) console.log(err);
-
-  //   // let productImageArray = [];
-  //   // let productImageArrayNames = [];
-
-  //   let productImageArrayObject = {};
-
-  //   const extensionName = "jpeg";
-
-  //   // console.log("\nCurrent directory filenames:");
-  //   files.forEach((filename, i) => {
-  //     // console.log(data);
-
-  //     // console.log(filename);
-
-  //     const result = fs.readFileSync(
-  //       `public/products/${filename}`,
-  //       // {
-  //       //   encoding: "base64",
-  //       // },
-
-  //       function (err, data) {
-  //         if (err) {
-  //           return res.status(200).json({ message: "no image" });
-  //         }
-
-  //         return data;
-
-  //         // // convert image file to base64-encoded string
-  //         // const base64Image = Buffer.from(data, "binary").toString("base64");
-
-  //         // const base64ImageStr = `data:image/${extensionName
-  //         //   .split(".")
-  //         //   .pop()};base64,${base64Image}`;
-
-  //         // // console.log(base64ImageStr);
-
-  //         // return base64ImageStr;
-  //         // console.log(data);
-  //       }
-  //     );
-
-  //     // convert image file to base64-encoded string
-  //     let base64Image = Buffer.from(result, "binary").toString("base64");
-
-  //     let base64ImageStr = `data:image/${extensionName
-  //       .split(".")
-  //       .pop()};base64,${base64Image}`;
-
-  //     productImageArrayObject[filename.split(".")[0]] = base64ImageStr;
-
-  //     // productImageArrayNames.push(filename);
-  //     // productImageArray.push(result);
-  //   });
-
-  //   let darray = [];
-
-  //   // console.log(productImageArrayNames);
-
-  //   // console.log(productImageArrayObject);
-
-  //   // Object.entries(productImageArrayObject).forEach(
-  //   //   (entry) => `${entry}: ${"1"}`
-  //   // );
-
-  //   // county.nameCombined = `${county.countyCode} (${county.stateCode})`;
-  //   // county.codeCombined = `${county.countyCode} ${county.stateCode} ${countyName}`;
-
-  //   // console.log(productImageArrayObject);
-
-  //   // productImageArray.forEach((data, i) => {
-  //   //   // console.log(data);
-
-  //   //   // convert image file to base64-encoded string
-  //   //   const base64Image = Buffer.from(data, "binary").toString("base64");
-
-  //   //   const base64ImageStr = `data:image/${extensionName
-  //   //     .split(".")
-  //   //     .pop()};base64,${base64Image}`;
-
-  //   //   // console.log(base64ImageStr);
-  //   //   darray.push(base64ImageStr);
-
-  //   //   // console.log(data);
-  //   // });
-
-  //   // console.log(darray);
-
-  //   return res.status(200).json({ images: productImageArrayObject });
-  // });
-
   // `public/products/`;
 
-  // const directionname = path.join(
-  //   __dirname,
-  //   `/../public/users/${req.user.email}.jpeg`
-  // );
+  const directionname = path.join(
+    __dirname,
+    `/../public/users/${req.user.email}.jpeg`
+  );
 
   // const directionnamerr = path.dirname(
   //   "/../public/users/devyehia@gmail.com.jpeg"
@@ -627,42 +535,19 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   //   `./public/users/${req.user.email}.jpeg`
   // );
 
-  fs.readdir(`public/users/`, (err, files) => {
-    if (err) console.log(err);
+  //  fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
+  // if (err)
+  //   return res
+  //     .status(200)
+  //     .json({ message: "no image", direction: directionnameplace }); // Fail if the file can't be read.
 
-    // const result = fs.readFileSync(
-    //   `public/users/${req.user.email}.jpeg`
-    //   // {
-    //   //   encoding: "base64",
-    //   // },
-    // );
+  // const base64Image = Buffer.from(data, "binary").toString("base64");
 
-    fs.readFile(
-      `public/products/${filename}`,
-      // {
-      //   encoding: "base64",
-      // },
-
-      function (err, data) {
-        if (err) {
-          return res.status(200).json({ message: "no image" });
-        }
-
-        return data;
-
-        // // convert image file to base64-encoded string
-        // const base64Image = Buffer.from(data, "binary").toString("base64");
-
-        // const base64ImageStr = `data:image/${extensionName
-        //   .split(".")
-        //   .pop()};base64,${base64Image}`;
-
-        // // console.log(base64ImageStr);
-
-        // return base64ImageStr;
-        // console.log(data);
-      }
-    );
+  fs.readFileSync(directionname, function (err, data) {
+    if (err) return res.status(200).json({ message: "no image found" }); // Fail if the file can't be read.
+    // {
+    //   encoding: "base64",
+    // },
 
     const base64Image = Buffer.from(data, "binary").toString("base64");
 
@@ -672,6 +557,18 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
     // res.status(200).json({ images: base64ImageStr });
     res.status(200).json({ images: "there is a file" });
+
+    // // convert image file to base64-encoded string
+    // const base64Image = Buffer.from(data, "binary").toString("base64");
+
+    // const base64ImageStr = `data:image/${extensionName
+    //   .split(".")
+    //   .pop()};base64,${base64Image}`;
+
+    // // console.log(base64ImageStr);
+
+    // return base64ImageStr;
+    // console.log(data);
   });
 
   // fs.readFile(directionname, function (err, data) {
