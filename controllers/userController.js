@@ -614,26 +614,55 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
   // `public/products/`;
 
-  const directionname = path.join(
-    __dirname,
-    `/../public/users/${req.user.email}.jpeg`
-  );
+  // const directionname = path.join(
+  //   __dirname,
+  //   `/../public/users/${req.user.email}.jpeg`
+  // );
 
-  const directionnamerr = path.dirname(
-    "/../public/users/devyehia@gmail.com.jpeg"
-  );
+  // const directionnamerr = path.dirname(
+  //   "/../public/users/devyehia@gmail.com.jpeg"
+  // );
 
-  const directionnameplace = path.resolve(
-    `./public/users/${req.user.email}.jpeg`
-  );
+  // const directionnameplace = path.resolve(
+  //   `./public/users/${req.user.email}.jpeg`
+  // );
 
-  // fs.readFile(directionname, function (err, data) {
-  fs.readFile(directionnameplace, function (err, data) {
-    // fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
-    if (err)
-      return res
-        .status(200)
-        .json({ message: "no image", direction: directionnameplace }); // Fail if the file can't be read.
+  fs.readdir(`public/users/`, (err, files) => {
+    if (err) console.log(err);
+
+    // const result = fs.readFileSync(
+    //   `public/users/${req.user.email}.jpeg`
+    //   // {
+    //   //   encoding: "base64",
+    //   // },
+    // );
+
+    fs.readFileSync(
+      `public/products/${filename}`,
+      // {
+      //   encoding: "base64",
+      // },
+
+      function (err, data) {
+        if (err) {
+          return res.status(200).json({ message: "no image" });
+        }
+
+        return data;
+
+        // // convert image file to base64-encoded string
+        // const base64Image = Buffer.from(data, "binary").toString("base64");
+
+        // const base64ImageStr = `data:image/${extensionName
+        //   .split(".")
+        //   .pop()};base64,${base64Image}`;
+
+        // // console.log(base64ImageStr);
+
+        // return base64ImageStr;
+        // console.log(data);
+      }
+    );
 
     const base64Image = Buffer.from(data, "binary").toString("base64");
 
@@ -641,8 +670,25 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
       .split(".")
       .pop()};base64,${base64Image}`;
 
-    res.status(200).json({ images: base64ImageStr, direction: directionname });
+    res.status(200).json({ images: base64ImageStr });
   });
+
+  // fs.readFile(directionname, function (err, data) {
+  // fs.readFile(directionnameplace, function (err, data) {
+  //   // fs.readFile(`/${req.user.email}.jpeg`, function (err, data) {
+  //   if (err)
+  //     return res
+  //       .status(200)
+  //       .json({ message: "no image", direction: directionnameplace }); // Fail if the file can't be read.
+
+  //   const base64Image = Buffer.from(data, "binary").toString("base64");
+
+  //   const base64ImageStr = `data:image/${extensionName
+  //     .split(".")
+  //     .pop()};base64,${base64Image}`;
+
+  // res.status(200).json({ images: base64ImageStr, direction: directionname });
+  // });
 };
 
 // try {
