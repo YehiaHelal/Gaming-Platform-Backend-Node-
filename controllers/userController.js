@@ -523,7 +523,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // `public/products/`;
 
   // fs.readFile(directionname, function (err, data) {
-  fs.readFile(`public/users/${req.user.email}.jpeg`, function (err, data) {
+  fs.readFileSync(`public/users/${req.user.email}.jpeg`, function (err, data) {
     if (err) return res.status(200).json({ message: "no image" }); // Fail if the file can't be read.
 
     const base64Image = Buffer.from(data, "binary").toString("base64");
