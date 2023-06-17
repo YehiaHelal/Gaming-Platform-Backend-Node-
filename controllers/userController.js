@@ -559,33 +559,36 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // const directionnameplaceloc = path.resolve(process.cwd(), "public");
 
   // var path = require("path");
-  const configDirectory = path.resolve(process.cwd(), "public/users");
-  const file = fs.readFileSync(
-    path.join(configDirectory, "devyehia@gmail.com.jpeg"),
-    function (err, data) {
-      //   "utf8"
-      // );
-
-      // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-      // fs.readFileSync(directionnameplaceloc, function (err, data) {
-      if (err) {
-        console.log(err);
-        return res.status(400).json({ error: err });
-      } // Fail if the file can't be read.
-      // {
-      //   encoding: "base64",
-      // },
-
-      const base64Image = Buffer.from(data, "binary").toString("base64");
-
-      const base64ImageStr = `data:image/${extensionName
-        .split(".")
-        .pop()};base64,${base64Image}`;
-
-      // res.status(200).json({ images: base64ImageStr });
-      // res.status(200).json({ images: base64ImageStr });
-    }
+  const configDirectory = path.resolve(
+    process.cwd(),
+    "public/users",
+    "devyehia@gmail.com.jpeg"
   );
+  const file = fs.readFile(configDirectory, function (err, data) {
+    //   "utf8"
+    // );
+
+    // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
+    // fs.readFileSync(directionnameplaceloc, function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: err });
+    } // Fail if the file can't be read.
+    // {
+    //   encoding: "base64",
+    // },
+
+    const base64Image = Buffer.from(data, "binary").toString("base64");
+
+    const base64ImageStr = `data:image/${extensionName
+      .split(".")
+      .pop()};base64,${base64Image}`;
+
+    // res.status(200).json({ images: base64ImageStr });
+    // res.status(200).json({ images: base64ImageStr });
+  });
+
+  res.setHeader("Content-Type", "multipart/form-data");
 
   console.log(file);
   res.status(200).json({ images: file });
