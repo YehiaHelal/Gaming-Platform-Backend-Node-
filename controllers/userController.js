@@ -624,7 +624,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     if (err)
       return res
         .status(200)
-        .json({ message: "no image", direction: directionname }); // Fail if the file can't be read.
+        .json({ message: "no image", direction: __dirname }); // Fail if the file can't be read.
 
     const base64Image = Buffer.from(data, "binary").toString("base64");
 
