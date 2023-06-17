@@ -535,11 +535,11 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   //   `./public/users/${req.user.email}.jpeg`
   // );
 
-  const directionnameplaceloc = path.resolve(
-    `./public/users/devyehia@gmail.com.jpeg`
-  );
+  // const directionnameplaceloc = path.resolve(
+  //   `./public/users/devyehia@gmail.com.jpeg`
+  // );
 
-  console.log(directionnameplaceloc);
+  // console.log(directionnameplaceloc);
 
   // const directionnameplace = path.resolve(`devyehia@gmail.com.jpeg`);
 
@@ -555,25 +555,36 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
 
   // res.status(200).json({ code: "there is a file" });
 
-  // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
-  fs.readFileSync(directionnameplaceloc, function (err, data) {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ error: err });
-    } // Fail if the file can't be read.
-    // {
-    //   encoding: "base64",
-    // },
+  // const directionnameplaceloc = path.resolve(process.cwd(), "public");
 
-    const base64Image = Buffer.from(data, "binary").toString("base64");
+  // var path = require("path");
+  const configDirectory = path.resolve(process.cwd(), "public");
+  const file = readFileSync(
+    path.join(configDirectory, "devyehia@gmail.com.jpeg"),
+    function (err, data) {
+      //   "utf8"
+      // );
 
-    const base64ImageStr = `data:image/${extensionName
-      .split(".")
-      .pop()};base64,${base64Image}`;
+      // fs.readFile(`${req.user.email}.jpeg`, function (err, data) {
+      // fs.readFileSync(directionnameplaceloc, function (err, data) {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ error: err });
+      } // Fail if the file can't be read.
+      // {
+      //   encoding: "base64",
+      // },
 
-    // res.status(200).json({ images: base64ImageStr });
-    res.status(200).json({ images: base64ImageStr });
-  });
+      const base64Image = Buffer.from(data, "binary").toString("base64");
+
+      const base64ImageStr = `data:image/${extensionName
+        .split(".")
+        .pop()};base64,${base64Image}`;
+
+      // res.status(200).json({ images: base64ImageStr });
+      res.status(200).json({ images: base64ImageStr });
+    }
+  );
   // // convert image file to base64-encoded string
   // const base64Image = Buffer.from(data, "binary").toString("base64");
 
