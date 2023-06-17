@@ -287,7 +287,7 @@ const imageUserAddUpdate = async (req, res, next) => {
 
   `${process.cwd()}/public/users/devyehia@gmail.com.jpeg`;
 
-  const path = `${process.cwd()}/public/users/${req.user.email}.jpeg`;
+  const path = `./${process.cwd()}/public/users/${req.user.email}.jpeg`;
 
   // const path = `./../backend/public/users/${req.user.email}.jpeg`;
 
@@ -574,7 +574,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
   // res.status(200).json({ images: process.cwd() });
 
   fs.readFile(
-    `${process.cwd()}/public/users/devyehia@gmail.com.jpeg`,
+    `${process.cwd()}/public/users/${req.user.email}.jpeg`,
     function (err, data) {
       //   "utf8"
       // );
