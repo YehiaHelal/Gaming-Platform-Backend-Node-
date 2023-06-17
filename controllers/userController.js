@@ -344,7 +344,7 @@ const imageUserAddUpdate = async (req, res, next) => {
   //   }
   // );
 
-  res.status(200).json({ message: "Image Added Successfully" });
+  // res.status(200).json({ message: "Image Added Successfully" });
 };
 
 // for items adding
