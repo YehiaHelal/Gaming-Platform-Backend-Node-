@@ -565,7 +565,7 @@ const ImageProfileSendBackToFe = async (req, res, next) => {
     "devyehia@gmail.com.jpeg"
   );
 
-  res.status(200).json({ images: configDirectory });
+  res.status(200).json({ images: "configDirectory" });
 
   // fs.readFile(configDirectory, function (err, data) {
   //   //   "utf8"
