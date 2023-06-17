@@ -293,13 +293,15 @@ const imageUserAddUpdate = async (req, res, next) => {
 
   const path = `${process.cwd()}/public/users/${req.user.email}.jpeg`;
 
-  await sharp(req.files.photo.data)
-    .resize(300, 300)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(path);
+  // await sharp(req.files.photo.data)
+  //   .resize(300, 300)
+  //   .toFormat("jpeg")
+  //   .jpeg({ quality: 90 })
+  //   .toFile(path);
 
-  res.status(200).json({ message: "message" });
+  res
+    .status(200)
+    .json({ message: `${process.cwd()}/public/users/${req.user.email}.jpeg` });
 
   // const semiTransparentRedPng = await sharp(req.files.photo.data)
   //   .resize(300, 300)
