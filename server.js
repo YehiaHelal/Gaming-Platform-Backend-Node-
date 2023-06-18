@@ -45,7 +45,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "https://pharma-online-frontend.vercel.app",
+    origin: "https://gaming-platform-frontend-next.vercel.app",
   })
 );
 
