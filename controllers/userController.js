@@ -714,7 +714,7 @@ const uploadingImagesToS3 = async (req, res, next) => {
   //   }
   // );
   // const image = fs.readFile("image1.png");
- 
+
   fs.readFile(`${process.cwd()}/public/image1.png`, function (err, data) {
     if (err) throw err; // Fail if the file can't be read.
     // http.createServer(function(req, res) {

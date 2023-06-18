@@ -276,19 +276,31 @@ const deleteItem_post = async (req, res) => {
     // );
     // Deleting Item Image too
 
-    const filepathLocation = `${process.cwd()}/public/products/${name}.jpeg`;
+    // const filepathLocation = `${process.cwd()}/public/products/${name}.jpeg`;
 
-    fs.unlink(filepathLocation),
-      (err) => {
-        if (err) {
-          // console.log("error");
-        }
-        // return res
-        //   .status(400)
-        //   .json({ error: "File doesn't exist, can't find it." });
+    let filepathLocation = pathdirections.resolve(
+      "public",
+      "products",
+      `${name}.jpeg`
+    );
 
-        // console.log("successfully deleted");
-      };
+    // fs.unlink('./server/upload/my.csv',function(err){
+    fs.unlink(filepathLocation, function (err) {
+      if (err) console.log(err);
+      console.log("file deleted successfully");
+    });
+
+    // fs.unlink(filepathLocation),
+    //   (err) => {
+    //     if (err) {
+    //       // console.log("error");
+    //     }
+    //     // return res
+    //     //   .status(400)
+    //     //   .json({ error: "File doesn't exist, can't find it." });
+
+    //     // console.log("successfully deleted");
+    //   };
 
     res.status(200).json({ message: "Item Deleted" });
   } catch (error) {
@@ -349,23 +361,23 @@ const updateItem_post = async (req, res) => {
     }
   }
 
-  // if (req.body.name) {
-  //   // console.log("there is name");
+  if (req.body.name) {
+    // console.log("there is name");
 
-  //   const productname = req.body.name;
+    const productname = req.body.name;
 
-  //   try {
-  //     const newUserPassword = await Item.findOneAndUpdate(
-  //       { name: selectedItem },
-  //       { name: productname },
-  //       {
-  //         new: true,
-  //       }
-  //     );
-  //   } catch (error) {
-  //     res.status(400).json({ error: "Error, same product name already exist" });
-  //   }
-  // }
+    try {
+      const newUserPassword = await Item.findOneAndUpdate(
+        { name: selectedItem },
+        { name: productname },
+        {
+          new: true,
+        }
+      );
+    } catch (error) {
+      res.status(400).json({ error: "Error, same product name already exist" });
+    }
+  }
 
   // Assiging the Name and Price
   // const productname = req.body.name;
@@ -498,25 +510,30 @@ const updateItem_post = async (req, res) => {
   // if editing image
   try {
     if (req.files && req.body.name) {
-      // const path = `${process.cwd()}/public/products/${req.body.name}.jpeg`;
+      const path = `${process.cwd()}/public/products/${req.body.name}.jpeg`;
 
-      // await sharp(req.files.photo.data)
-      //   .resize(300, 300)
-      //   .toFormat("jpeg")
-      //   .jpeg({ quality: 90 })
-      //   .toFile(path);
+      await sharp(req.files.photo.data)
+        .resize(300, 300)
+        .toFormat("jpeg")
+        .jpeg({ quality: 90 })
+        .toFile(path);
 
       console.log(`${process.cwd()}`);
 
-      fs.unlink(`${process.cwd()}/../public/products/product700.jpeg`),
-        (err) => {
-          if (err) console.log("can't find it so");
+      let unlinkfile = pathdirections.resolve(
+        "public",
+        "products",
+        `${selectedItem}.jpeg`
+      );
 
-          // console.log("successfully deleted");
-        };
+      // fs.unlink('./server/upload/my.csv',function(err){
+      fs.unlink(unlinkfile, function (err) {
+        if (err) console.log(err);
+        console.log("file deleted successfully");
+      });
     }
   } catch (error) {
-    console.log("error");
+    console.log(error);
   }
 
   // if editing product but not image
