@@ -264,7 +264,7 @@ const deleteItem_post = async (req, res) => {
   // }
 
   try {
-    console.log(name);
+    // console.log(name);
     const item = await Item.findOneAndDelete({ name: name });
 
     if (!item) {
@@ -518,7 +518,7 @@ const updateItem_post = async (req, res) => {
         .jpeg({ quality: 90 })
         .toFile(path);
 
-      console.log(`${process.cwd()}`);
+      // console.log(`${process.cwd()}`);
 
       let unlinkfile = pathdirections.resolve(
         "public",
@@ -529,11 +529,11 @@ const updateItem_post = async (req, res) => {
       // fs.unlink('./server/upload/my.csv',function(err){
       fs.unlink(unlinkfile, function (err) {
         if (err) console.log(err);
-        console.log("file deleted successfully");
+        // console.log("file deleted successfully");
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 
   // if editing product but not image
