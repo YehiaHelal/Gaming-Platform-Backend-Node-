@@ -45,7 +45,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "www.gaming.shoponlinemarket.cloud",
+    origin: "https://www.gaming.shoponlinemarket.cloud",
   })
 );
 
